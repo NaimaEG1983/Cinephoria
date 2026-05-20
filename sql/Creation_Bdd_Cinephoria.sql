@@ -142,8 +142,8 @@ CREATE TABLE AVIS(
    id_moderateur INT,
    CONSTRAINT pk_avis PRIMARY KEY(id_avis),
    CONSTRAINT fk_avis_film FOREIGN KEY(film_id) REFERENCES FILM(film_id) ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT fk_avis_utilisateur FOREIGN KEY(id_util) REFERENCES Utilisateur(id_util) ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT fk_avis_moderateur FOREIGN KEY(id_moderateur) REFERENCES Utilisateur(id_util) ON DELETE SET NULL ON UPDATE CASCADE,
+   CONSTRAINT fk_avis_utilisateur FOREIGN KEY(id_util) REFERENCES UTILISATEUR(id_util) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT fk_avis_moderateur FOREIGN KEY(id_moderateur) REFERENCES UTILISATEUR(id_util) ON DELETE SET NULL ON UPDATE CASCADE,
    CONSTRAINT chk_avis_note CHECK (note BETWEEN 0 AND 5),
    CONSTRAINT chk_avis_validation CHECK (validation IN ('A', 'V', 'R'))
 ) ENGINE=InnoDB;
@@ -151,13 +151,13 @@ CREATE TABLE AVIS(
 CREATE TABLE INCIDENT(
    id_incident INT AUTO_INCREMENT,
    type_installation VARCHAR(50),
-   etat CHAR(1) DEFAULT 'C' NOT NULL,
+   etat CHAR(1) DEFAULT 'C' NOT NULL, -- 'C' (En cours), 'R' (Résolu)
    incident_description TEXT,
    id_salle INT NOT NULL,
    id_util INT NOT NULL,
    CONSTRAINT pk_incident PRIMARY KEY(id_incident),
    CONSTRAINT fk_incident_salle FOREIGN KEY(id_salle) REFERENCES SALLE(id_salle) ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT fk_incident_utilisateur FOREIGN KEY(id_util) REFERENCES Utilisateur(id_util) ON DELETE RESTRICT ON UPDATE CASCADE,
+   CONSTRAINT fk_incident_utilisateur FOREIGN KEY(id_util) REFERENCES UTILISATEUR(id_util) ON DELETE RESTRICT ON UPDATE CASCADE,
    CONSTRAINT chk_incident_etat CHECK (etat IN ('C', 'R'))
 ) ENGINE=InnoDB;
 
@@ -186,7 +186,7 @@ CREATE TABLE CONTACT(
    date_envoi DATETIME DEFAULT NOW(),
    id_util INT,
    CONSTRAINT pk_contact PRIMARY KEY(id_contact),
-   CONSTRAINT fk_contact_utilisateur FOREIGN KEY(id_util) REFERENCES Utilisateur(id_util) ON DELETE SET NULL ON UPDATE CASCADE
+   CONSTRAINT fk_contact_utilisateur FOREIGN KEY(id_util) REFERENCES UTILISATEUR(id_util) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE RESERVATION(
@@ -199,7 +199,7 @@ CREATE TABLE RESERVATION(
    id_util INT NOT NULL,
    CONSTRAINT pk_reservation PRIMARY KEY(reservation_id),
    CONSTRAINT fk_reservation_seance FOREIGN KEY(id_seance) REFERENCES SEANCE(id_seance) ON DELETE RESTRICT ON UPDATE CASCADE,
-   CONSTRAINT fk_reservation_utilisateur FOREIGN KEY(id_util) REFERENCES Utilisateur(id_util) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT fk_reservation_utilisateur FOREIGN KEY(id_util) REFERENCES UTILISATEUR(id_util) ON DELETE CASCADE ON UPDATE CASCADE,
    CONSTRAINT chk_reservation_statut CHECK (statut IN ('E', 'V', 'A'))
 ) ENGINE=InnoDB;
 
