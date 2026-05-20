@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+/* 1. Fond sombre général */
+body {
+  background-color: #121214;
+  color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2. Customisation de TOUS les boutons au survol ou contours */
+.btn-outline-success {
+  color: #34D399 !important;
+  border-color: #34D399 !important;
+}
+
+.btn-outline-success:hover {
+  background-color: #34D399 !important;
+  border-color: #34D399 !important;
+  color: #121214 !important; /* Texte sombre sur fond vert pour la lisibilité */
+  font-weight: 600;
+}
+
+/* 3. Style pour les liens actifs de la Navbar */
+.navbar-dark .navbar-nav .nav-link.active {
+  color: #34D399 !important;
+  font-weight: 600;
+}
+
+/* 4. Effet au survol des liens du footer */
+.hover-link:hover {
+  color: #34D399 !important;
+  transition: color 0.2s ease;
+}
+
+/* 5. Une classe utilitaire réutilisable si tu as besoin de texte vert ailleurs */
+.text-custom-green {
+  color: #34D399 !important;
+}
