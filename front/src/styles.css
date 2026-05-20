@@ -34,3 +34,90 @@ body {
 .text-custom-green {
   color: #34D399 !important;
 }
+
+/* --- STYLES DE LA PAGE D'ACCUEIL --- */
+
+/* Fond légèrement différent pour séparer les sections */
+.bg-dark-soft {
+  background-color: #161619;
+}
+
+/* Bouton vert personnalisé plein avec ton code couleur #34D399 */
+.btn-success-custom {
+  background-color: #34D399 !important;
+  color: #121214 !important;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-success-custom:hover {
+  background-color: #25b884 !important; /* Un vert un poil plus sombre au survol */
+  transform: translateY(-2px); /* Léger effet de surélévation */
+  color: #121214 !important;
+}
+
+/* Effet de halo lumineux derrière l'image de cinéma */
+.hero-blur-effect {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.15) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(20px);
+  z-index: 0;
+}
+
+/* Bordure pointillée pour la zone d'attente des films */
+.border-dashed {
+  border-style: dashed !important;
+}
+
+/* Style de la police Inter si ce n'est pas déjà fait */
+.font-family-Inter {
+  font-family: 'Inter', sans-serif;
+}
+
+//* Arrière-plan de la Hero Section raccourcie */
+.hero-bg {
+  min-height: 40vh; /* 💡 On passe de 75vh à 40vh pour qu'elle soit beaucoup plus petite */
+  background: linear-gradient(rgba(18, 18, 20, 0.65), rgba(18, 18, 20, 0.95)), 
+              url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1920&auto=format&fit=crop') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Boîte optionnelle pour donner un effet de flou "Glassmorphism" derrière tes textes */
+.content-box {
+  background: rgba(18, 18, 20, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px border rgba(255, 255, 255, 0.05);
+}
+
+/* Bouton vert Cinéphoria */
+.btn-custom-green {
+  background-color: #34D399 !important;
+  color: #121214 !important;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-custom-green:hover {
+  background-color: #25b884 !important;
+  transform: translateY(-2px);
+  color: #121214 !important;
+}
+
+/* Tailles de police spécifiques si non gérées par défaut */
+.fs-7 {
+  font-size: 0.85rem;
+}
+
+/* Effet d'animation discret sur les cartes de films */
+.movie-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(52, 211, 153, 0.1) !important;
+  border-color: rgba(52, 211, 153, 0.3) !important;
+}
