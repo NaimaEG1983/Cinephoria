@@ -59,10 +59,10 @@ INSERT INTO FILM (titre, description, duree, date_sortie, affiche_image, age_min
 ('Le Roi Lion', 'Simba devient roi.', 88, '1994-06-24', 'leroilion.jpg', 0, TRUE, 4.7),
 ('Toy Story', 'Les jouets prennent vie.', 81, '1995-11-22', 'toystory.jpg', 0, TRUE, 4.6),
 ('Intouchables', 'Amitié entre deux hommes opposés.', 112, '2011-11-02', 'intouchables.jpg', 7, TRUE, 4.9),
-('The Dark Knight', 'Batman contre le Joker.', 152, '2008-07-18', 'darkknight.jpg', 12, TRUE, 4.9),
-('Avengers Endgame', 'Combat final contre Thanos.', 181, '2019-04-24', 'endgame.jpg', 12, TRUE, 4.7),
+('The Dark Knight', 'Batman contre le Joker.', 152, '2008-07-18', 'thedarkknight.jpg', 12, TRUE, 4.9),
+('Avengers Endgame', 'Combat final contre Thanos.', 181, '2019-04-24', 'avengersendgame.jpg', 12, TRUE, 4.7),
 ('Forrest Gump', 'Une vie extraordinaire.', 142, '1994-07-06', 'forrestgump.jpg', 10, TRUE, 4.8),
-('Jurassic Park', 'Des dinosaures s’échappent.', 127, '1993-06-11', 'jurassicpark.jpg', 10, TRUE, 4.5),
+('Jurassic Park', 'Des dinosaures s’échappent.', 127, '1993-06-11', 'jurassikpark.jpg', 10, TRUE, 4.5),
 ('Very Bad Trip', 'Une soirée incontrôlable.', 100, '2009-06-05', 'verybadtrip.jpg', 16, FALSE, 4.1);
 
 -- ============================================================================
@@ -133,5 +133,20 @@ INSERT INTO CONTACT (nom_utilisateur, id_utilisateur, email_utilisateur, descrip
 -- ============================================================================
 -- AJOUTE UTILISATEUR FILM
 -- ============================================================================
-INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES
-(4,1,'2026-05-14'), (4,3,'2026-05-14'), (5,6,'2026-05-14');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (4, 1, '2026-05-14');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (4, 3, '2026-05-14');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (5, 6, '2026-05-14');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (1, 2, '2026-05-06');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (1, 7, '2026-05-13');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (1, 10, '2026-05-20');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (2, 4, '2026-05-06');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (2, 8, '2026-05-13');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (2, 9, '2026-05-20');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (3, 1, '2026-05-06');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (3, 5, '2026-05-13');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (3, 6, '2026-05-20');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (4, 8, '2026-05-06');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (4, 10, '2026-05-20');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (5, 3, '2026-05-06');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (5, 5, '2026-05-13');
+INSERT INTO ajoute_UtilisateurFilm (id_util, film_id, date_mercredi) VALUES (5, 7, '2026-05-20');

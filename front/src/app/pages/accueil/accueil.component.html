@@ -1,62 +1,69 @@
-<section class="hero-bg d-flex align-items-center py-4">
-  <div class="container-fluid py-2">
-    
-    <div class="px-1 row justify-content-center align-items-center">
-      <div class="col-12 col-md-10 col-lg-8 col-xxl-6 text-center content-box p-3 rounded-4">
-        
-        <h1 class="text-white fs-2 fw-bold font-family-Inter m-0 px-3 py-1 text-uppercase tracking-wide">
-          Vivez l’expérience cinéma autrement
-        </h1>
-        
-        <p class="text-success-subtle fs-6 fw-medium font-family-Inter m-0 px-3 py-2">
-          Découvrez nos séances dans nos 7 cinémas en France et en Belgique. 
-          Une expérience responsable et inoubliable.
-        </p>
-
-      </div>
-    </div>
-
+<section class="hero-bg container-fluid bg-dark py-2 m-0 w-100">
+  <div class="px-1 py-1 row justify-content-center align-items-center m-0">
+    <h1 class="text-center text-white fs-3 fw-bold font-family-Inter col-12 m-0 px-3 py-1">
+      Vivez l’expérience cinéma autrement
+    </h1>
+    <p class="text-center text-success-subtle fs-6 fw-medium font-family-Inter col-12 col-md-8 m-0 px-3 py-0">
+      Découvrez nos séances dans nos 7 cinémas en France et en Belgique. Une expérience responsable et inoubliable.
+    </p>
   </div>
 </section>
-<section class="py-5 bg-dark-soft">
-  <div class="container-fluid px-4">
+
+<section class="py-4 bg-dark-soft flex-grow-1">
+  <div class="container px-3 px-sm-4 px-md-5">
     
     <div class="mb-4">
-      <h2 class="text-white fs-4 fw-medium font-family-Inter m-0 border-start border-success border-3 ps-3">
+      <h2 class="text-white fs-5 fw-medium font-family-Inter m-0 border-start border-success border-3 ps-3">
         Dernièrement ajoutés
       </h2>
     </div>
     
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
-      @for (film of filmsAffiches; track film.titre) {
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 g-4 justify-content-center">
+      
+      @for (film of filmsAffiches; track film.film_id) {
         <div class="col">
-          <div class="card h-100 bg-black border border-secondary border-opacity-25 rounded-4 overflow-hidden movie-card shadow">
-            <div class="position-relative overflow-hidden">
-              <img [src]="film.image" [alt]="film.titre" class="card-img-top img-fluid" style="height: 330px; object-fit: cover;">
+          <div class="card h-100 bg-black border border-secondary border-opacity-25 rounded-4 overflow-hidden movie-card shadow p-0">
+            
+            <div class="ratio-affiche overflow-hidden w-100">
+              <img [src]="film.affiche_image" [alt]="film.titre" class="w-100 h-100" style="object-fit: cover;">
             </div>
+            
             <div class="card-body d-flex flex-column justify-content-between p-3">
-              <h3 class="card-title text-white fs-5 fw-bold font-family-Inter text-truncate mb-2">
-                {{ film.titre }}
-              </h3>
-              <div class="d-flex justify-content-between align-items-center mt-auto">
-                <span class="text-white-50 fs-7 fw-normal font-family-Inter text-truncate me-2">
-                  {{ film.genre }}
+              
+              <div class="d-flex align-items-center mb-2" style="min-height: 24px;">
+                <h3 class="card-title text-white fs-6 fw-bold font-family-Inter text-truncate m-0 w-100" [title]="film.titre">
+                  {{ film.titre }}
+                </h3>
+              </div>
+              
+              <div class="d-flex justify-content-between align-items-center mt-auto w-100" style="min-height: 38px;">
+                <span class="text-white-50 fs-7 fw-normal font-family-Inter me-2" 
+                      style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"
+                      [title]="film.genre">
+                  {{ film.genre || 'N/A' }}
                 </span>
-                <span class="badge bg-dark text-success-subtle border border-secondary border-opacity-50 font-family-Inter fs-7 fw-normal flex-shrink-0">
-                  {{ film.duree }}
+                <span class="badge bg-dark text-success-subtle border border-secondary border-opacity-50 font-family-Inter fs-7 fw-normal flex-shrink-0 p-1 px-2">
+                  {{ film.duree | dureeFormat }}
                 </span>
               </div>
             </div>
+
           </div>
         </div>
+      } @empty {
+        <div class="col-12 text-center text-white-50 py-5 font-family-Inter">
+          <i class="bi bi-film fs-2 d-block mb-2 text-secondary"></i>
+          Aucun film n'a été ajouté récemment.
+        </div>
       }
+
     </div>
 
-    @if (derniersFilms.length > 4) {
-      <div class="text-center mt-5">
-        <button (click)="voirTout = !voirTout" class="btn btn-outline-success px-4 py-2 font-family-Inter fw-medium">
+    @if (derniersFilms && derniersFilms.length > 4) {
+      <div class="text-center mt-4">
+        <button (click)="voirTout = !voirTout" class="btn btn-outline-success btn-sm px-4 py-2 font-family-Inter fw-medium">
           @if (!voirTout) {
-            <i class="bi bi-chevron-down me-2"></i>Voir plus de nouveautés
+            <i class="bi bi-chevron-down me-2"></i>Voir plus
           } @else {
             <i class="bi bi-chevron-up me-2"></i>Voir moins
           }

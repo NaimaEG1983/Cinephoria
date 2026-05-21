@@ -37,9 +37,10 @@ body {
 
 /* --- STYLES DE LA PAGE D'ACCUEIL --- */
 
-/* Fond légèrement différent pour séparer les sections */
+/* Fond légèrement différent pour séparer les sections + Remplissage de l'espace vertical */
 .bg-dark-soft {
   background-color: #161619;
+  flex-grow: 1; /* Permet à la section de s'étirer jusqu'au footer si le contenu est court */
 }
 
 /* Bouton vert personnalisé plein avec ton code couleur #34D399 */
@@ -75,20 +76,34 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-//* Arrière-plan de la Hero Section raccourcie */
+/* Arrière-plan de la Hero Section raccourcie */
 .hero-bg {
-  min-height: 40vh; /* 💡 On passe de 75vh à 40vh pour qu'elle soit beaucoup plus petite */
-  background: linear-gradient(rgba(18, 18, 20, 0.65), rgba(18, 18, 20, 0.95)), 
-              url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1920&auto=format&fit=crop') no-repeat;
-  background-size: cover;
-  background-position: center;
+  width: 100vw !important;
+  max-width: 100% !important;
+  
+  /* 1. Hauteur ultra-réduite (bandeau très fin) */
+  min-height: 12vh !important; 
+  height: auto !important;
+
+  /* 2. On supprime absolument TOUTES les marges */
+  margin: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  
+  background: #121214 !important;
+}
+
+/* On force aussi le parent ou le container Bootstrap à ne pas bloquer la largeur */
+:host, .container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Boîte optionnelle pour donner un effet de flou "Glassmorphism" derrière tes textes */
 .content-box {
   background: rgba(18, 18, 20, 0.65);
   backdrop-filter: blur(8px);
-  border: 1px border rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Correction syntaxique mineure ici */
 }
 
 /* Bouton vert Cinéphoria */
@@ -107,9 +122,9 @@ body {
 }
 
 /* Tailles de police spécifiques si non gérées par défaut */
-.fs-7 {
-  font-size: 0.85rem;
-}
+.fs-7 { font-size: 0.85rem; }
+.fs-8 { font-size: 0.75rem; }
+.fs-9 { font-size: 0.65rem; }
 
 /* Effet d'animation discret sur les cartes de films */
 .movie-card {
@@ -120,4 +135,67 @@ body {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(52, 211, 153, 0.1) !important;
   border-color: rgba(52, 211, 153, 0.3) !important;
+}
+
+/* --- STRUCTURE ET ALIGNEMENTS CRUTIAUX --- */
+
+header, nav, app-header, .navbar {
+  margin-bottom: 0 !important; 
+  padding-bottom: 0 !important;
+}
+
+/* Force l'application à prendre toute la hauteur de la fenêtre */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Configure le layout global en colonne Flexbox */
+app-root, body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Force le composant d'accueil à être lui aussi un conteneur flex */
+app-accueil, main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* --- GESTION DU RATIO D'IMAGE (POUR LES AFFICHES) --- */
+/* Ces styles sont utiles si votre version de Bootstrap est ancienne et n'inclut pas les ratios */
+.ratio {
+  position: relative;
+  width: 100%;
+}
+.ratio::before {
+  display: block;
+  content: "";
+}
+.ratio > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.ratio-16x9::before {
+  padding-top: 56.25%; /* 9/16 * 100 */
+}
+
+/* Une marge identique, fine et propre pour le Header et le Footer */
+.layout-spacing {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+/* Optionnel : Ajustement sur grand écran pour que ça reste élégant */
+@media (min-width: 768px) {
+  .layout-spacing {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
 }

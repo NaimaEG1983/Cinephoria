@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # Notre base de données de développement MariaDB
+  database:
+    image: mariadb:latest
+    container_name: cinephoria_sandbox
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: super_secret
+      MARIADB_DATABASE: cinephoria_dev
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

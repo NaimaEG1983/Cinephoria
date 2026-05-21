@@ -1,30 +1,51 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { Film } from '../../core/models/film.model';
+import { FilmService } from '../../core/services/film.service';
+import { DureeFormatPipe } from '../../pipes/duree-format.pipe';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [RouterLink],
+  imports: [CommonModule, DureeFormatPipe],
   templateUrl: './accueil.component.html',
-  styleUrl: './accueil.component.css'
+  styleUrls: ['./accueil.component.css']
 })
-export class AccueilComponent {
+export class AccueilComponent implements OnInit {
   
-  // Par défaut, on n'affiche pas tout si le tableau est très grand
-  voirTout = false;
+  // Déclaration des variables d'instance indispensables pour le HTML
+  derniersFilms: Film[] = []; 
+  voirTout: boolean = false;
 
-  derniersFilms = [
-    { titre: 'Intouchables', genre: 'Comédie, Drame', duree: '1h52min', image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=400&auto=format&fit=crop' },
-    { titre: 'Toy Story', genre: 'Animation, Comédie', duree: '1h21min', image: 'https://images.unsplash.com/photo-1608889174639-414d9f96dd81?q=80&w=400&auto=format&fit=crop' },
-    { titre: 'Inception', genre: 'Science-Fiction, Action', duree: '2h28min', image: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400&auto=format&fit=crop' },
-    { titre: 'The Dark Knight', genre: 'Drame, Action', duree: '2h32min', image: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=400&auto=format&fit=crop' },
-    // J'ajoute deux films fictifs pour tester le système "Voir plus" :
-    { titre: 'Interstellar', genre: 'SF, Drame', duree: '2h49min', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop' },
-    { titre: 'Avatar', genre: 'Action, Aventure', duree: '2h42min', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop' }
-  ];
+  constructor(private filmService: FilmService) { }
 
-  // Cette fonction renvoie soit les 4 premiers films, soit la totalité
-  get filmsAffiches() {
-    return this.voirTout ? this.derniersFilms : this.derniersFilms.slice(0, 4);
+  ngOnInit(): void {
+    // Récupération des données depuis le Service
+    this.filmService.getDerniersFilms().subscribe({
+      next: (data: Film[]) => {
+        this.derniersFilms = data; // Stocke l'ensemble des films de la semaine
+        console.log('Films chargés avec succès :', this.derniersFilms);
+      },
+      error: (err: any) => {
+        console.error('Erreur lors du chargement des nouveautés :', err);
+      }
+    });
   }
+
+  // Le "getter" qui génère dynamiquement la propriété 'filmsAffiches'
+  get filmsAffiches(): Film[] {
+  // 1. On récupère la liste des films (tous ou les 4 premiers)
+  const listeFilms = this.voirTout ? this.derniersFilms : this.derniersFilms.slice(0, 4);
+
+  // 2. On transforme (map) la propriété 'affiche_image' pour y ajouter l'URL de l'API Node
+  return listeFilms.map(film => ({
+    ...film,
+    // Si l'image commence déjà par http, on la laisse, sinon on construit l'URL locale
+    affiche_image: film.affiche_image.startsWith('http') 
+      ? film.affiche_image 
+      : `${environment.imagesUrl}/${film.affiche_image}`
+  }));
+}
 }
