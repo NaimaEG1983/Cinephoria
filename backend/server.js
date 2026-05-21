@@ -19,11 +19,11 @@ app.listen(PORT, () => {
 
 // connexion à la base de données
 const db = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',          // nom d'utilisateur MySQL 
-  password: 'super_secret',  // mot de passe MySQL 
-  database: 'cinephoria_dev',
-  port: 3307
+  host: process.env.DB_HOST || '127.0.0.1',
+  user: process.env.DB_USER || 'root',          
+  password: process.env.DB_PASSWORD || 'super_secret',  
+  database: process.env.DB_NAME || 'cinephoria_dev',
+  port: process.env.DB_PORT || 3307
 });
 
 // 
